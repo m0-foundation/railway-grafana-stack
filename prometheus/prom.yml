@@ -5,6 +5,13 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
+  - job_name: "uptime-kuma"
+    scrape_interval: 30s
+    scheme: https
+    static_configs:
+      - targets: ["uptime-kuma-monitor.up.railway.app"]
+    basic_auth:
+      password: $UPTIME_KUMA_PASSWORD
 
   # - job_name: 'example_api'
   #   scheme: http
@@ -15,7 +22,7 @@ scrape_configs:
   # - job_name: 'your-job-name'
   #   scheme: https
   #   static_configs:
-  #     - targets: ['URL_GOES_HERE']
+  #     - targets: ['$YOUR_SERVICE_URL']
   #   basic_auth:
-  #     username: HTTP_AUTH_USERNAME_GOES_HERE
-  #     password: HTTP_AUTH_PASSWORD_GOES_HERE
+  #     username: $HTTP_AUTH_USERNAME
+  #     password: $HTTP_AUTH_PASSWORD
